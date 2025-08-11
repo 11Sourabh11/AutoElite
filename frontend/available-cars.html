@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Available Cars - AutoElite</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"/>
+</head>
+<body>
+  <script>
+    const token = localStorage.getItem("token");
+    if (!token) {
+      alert("You must login first to access this page.");
+      window.location.href = "auth.html?action=login";
+    }
+  </script>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <img  src="autoElite.png" alt="AutoElite logo" class="me2" width="60px" /> AutoElite
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="available-cars.html">Inventory</a></li>
+                    <li class="nav-item"><a class="nav-link" href="car-rental.html">Rentals</a></li>
+                    <li class="nav-item"><a class="nav-link" href="sell-car.html">Sell Your Car</a></li>
+                </ul>
+                <!-- <div class="d-flex">
+                    <a href="auth.html?action=login" class="btn btn-outline-light me-2">Login</a>
+                    <a href="auth.html?action=register" class="btn btn-primary">Register</a>
+                </div> -->
+            </div>
+        </div>
+        <li class="nav-item nav-link">
+  <a class=" btn btn-outline-light " href="#" onclick="logout()">Logout</a>
+</li>
+
+    </nav>
+
+    
+
+  <!-- Cars List -->
+  <div class="container mt-5">
+    <h2 class="text-center mb-4">Available Cars for Purchase</h2>
+    <div class="row" id="inventory-container">
+      <!-- Cars dynamically injected here -->
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="bg-dark text-white mt-5 py-4">
+    <div class="container text-center">
+      &copy; 2025 AutoElite. All rights reserved.
+    </div>
+  </footer>
+
+  <script>
+    function logout() {
+      localStorage.removeItem("token");
+      alert("You have been logged out.");
+      window.location.href = "auth.html?action=login";
+    }
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

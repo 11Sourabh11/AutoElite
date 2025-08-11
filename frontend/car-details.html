@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Car Details | AutoElite</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"/>
+   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
+</head>
+<body class="bg-dark text-white">
+<script>
+  const token = localStorage.getItem("token");
+  if (!token) {
+    alert("You must login first to access this page.");
+    window.location.href = "auth.html?action=login";
+  }
+</script>
+
+<!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <img  src="autoElite.png" alt="AutoElite logo" class="me2" width="60px" /> AutoElite
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="available-cars.html">Inventory</a></li>
+                    <li class="nav-item"><a class="nav-link" href="car-rental.html">Rentals</a></li>
+                    <li class="nav-item"><a class="nav-link" href="sell-car.html">Sell Your Car</a></li>
+                </ul>
+                <!-- <div class="d-flex">
+                    <a href="auth.html?action=login" class="btn btn-outline-light me-2">Login</a>
+                    <a href="auth.html?action=register" class="btn btn-primary">Register</a>
+                </div> -->
+            </div>
+        </div>
+        <li class="nav-item nav-link">
+  <a class=" btn btn-outline-light " href="index.html" onclick="logout()">Logout</a>
+</li>
+
+    </nav>
+
+<div class="container py-5">
+  <h2 class="text-center mb-4"> Car Details</h2>
+  <div id="carDetails" class="row justify-content-center"></div>
+
+  <div id="purchaseForm" class="mt-5" style="display: none;">
+    <h4 class="text-center text-info">Complete Your Purchase</h4>
+    <form id="buyForm" class="text-white">
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label>Full Name</label>
+          <input type="text" class="form-control" required id="buyerName" placeholder="Full Name">
+        </div>
+        <div class="form-group col-md-6">
+          <label>Email</label>
+          <input type="email" class="form-control" required id="buyerEmail" placeholder="example@email.com">
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Phone</label>
+        <input type="tel" class="form-control" required id="buyerPhone" placeholder="9876543210">
+      </div>
+      <div class="form-group">
+        <label>Delivery Address</label>
+        <textarea class="form-control" rows="3" id="buyerAddress" required></textarea>
+      </div>
+      <div class="form-group">
+        <label>Payment Method</label>
+        <select class="form-control" id="paymentMethod" required>
+          <option value="">Select</option>
+          <option value="Credit Card">Credit Card</option>
+          <option value="UPI">UPI</option>
+          <option value="Cash on Delivery">Cash on Delivery</option>
+        </select>
+      </div>
+      <button type="submit" class="btn btn-success btn-block mt-3">Confirm Purchase</button>
+    </form>
+  </div>
+</div>
+
+
+<script src="script.js"></script>
+<script>
+  const carId = parseInt(localStorage.getItem("selectedCarId"));
+  const car = cars.find(c => c.id === carId);
+
+  const carDetailsContainer = document.getElementById("carDetails");
+
+  if (car) {
+    carDetailsContainer.innerHTML = `
+      <div class="col-md-8">
+        <div class="card text-dark">
+          <img src="${car.image}" class="card-img-top" alt="${car.make} ${car.model}" style="max-height: 400px; object-fit: cover;">
+          <div class="card-body">
+            <h3 class="card-title">${car.make} ${car.model}</h3>
+            <p><strong>Year:</strong> ${car.year}</p>
+            <p><strong>Price:</strong> ₹${car.price.toLocaleString()}</p>
+            <p><strong>Description:</strong> ${car.description || 'A well-maintained car with excellent performance.'}</p>
+            <p><strong>Location:</strong> ${car.location || 'Showroom #12, Sector 5'}</p>
+            <button class="btn btn-primary mr-2" onclick="window.history.back()">Back</button>
+            <button class="btn btn-success" onclick="showBuyForm()"> Buy Now</button>
+          </div>
+        </div>
+      </div>
+    `;
+  } else {
+    carDetailsContainer.innerHTML = `<p class="text-danger">Car not found.</p>`;
+  }
+
+  function showBuyForm() {
+    document.getElementById("purchaseForm").style.display = "block";
+    window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
+  }
+
+  document.getElementById("buyForm").addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    const buyerData = {
+      carId,
+      name: document.getElementById("buyerName").value,
+      email: document.getElementById("buyerEmail").value,
+      phone: document.getElementById("buyerPhone").value,
+      address: document.getElementById("buyerAddress").value,
+      paymentMethod: document.getElementById("paymentMethod").value
+    };
+
+    // You can replace this with a real POST request to your backend
+    console.log("Purchase submitted:", buyerData);
+    alert("🎉 Purchase confirmed! Our team will contact you soon.");
+    document.getElementById("buyForm").reset();
+    document.getElementById("purchaseForm").style.display = "none";
+  });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>AutoElite - Premium Car Showroom</title>
+    <link rel="stylesheet" href="style.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+    
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <img  src="autoElite.png" alt="AutoElite logo" class="me2" width="60px" /> AutoElite
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="available-cars.html">Inventory</a></li>
+                    <li class="nav-item"><a class="nav-link" href="car-rental.html">Rentals</a></li>
+                    <li class="nav-item"><a class="nav-link" href="sell-car.html">Sell Your Car</a></li>
+                </ul>
+                <div class="d-flex">
+                    <a href="auth.html?action=login" class="btn btn-outline-light me-2">Login</a>
+                    <a href="auth.html?action=register" class="btn btn-primary">Register</a>
+                </div>
+            </div>
+        </div>
+        <li class="nav-item">
+  <a class="nav-link" href="index.html" onclick="logout()">Logout</a>
+</li>
+
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero-section">
+        <div class="container">
+            <div class="hero-content text-center">
+                <h1>Premium Cars at Affordable Prices</h1>
+                <p>Buy, Sell or Rent luxury vehicles with confidence</p>
+                <div class="search-box d-flex justify-content-center mt-3">
+                    <input type="text" class="form-control w-50 me-2" id ="searchInput" placeholder="Search by make, model or price..."/>
+                    <button class="btn btn-primary"  id=" searchBtn">Search</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Features Section -->
+<section class="container mt-5" id="features">
+  <div class="row text-center">
+
+    <!-- BUY -->
+    <div class="col-md-4 feature-card">
+      <a href="available-cars.html" class="text-decoration-none text-dark">
+        <i class="fas fa-car fa-2x mb-2"></i>
+        <h3>Buy</h3>
+        <p>Discover our curated collection of premium vehicles</p>
+      </a>
+    </div>
+
+    <!-- SELL -->
+    <div class="col-md-4 feature-card">
+      <a href="sell-car.html" class="text-decoration-none text-dark">
+        <i class="fas fa-indian-rupee-sign fa-2x mb-2"></i>
+        <h3>Sell</h3>
+        <p>Get the best value for your car with our selling platform</p>
+      </a>
+    </div>
+
+    <!-- RENT -->
+    <div class="col-md-4 feature-card">
+      <a href="car-rental.html" class="text-decoration-none text-dark">
+        <i class="fas fa-calendar-alt fa-2x mb-2"></i>
+        <h3>Rent</h3>
+        <p>Flexible rental options for your every need</p>
+      </a>
+    </div>
+
+  </div>
+</section>
+<!-- //sliding  -->
+
+
+<section id="featured-slider" class="py-5 text-black" style="background: linear-gradient(to right, #429fc7, #1e7896, #5b97b1);">
+  <div class="container">
+    <h2 class="text-center mb-4">Featured Inventory</h2>
+    <div class="car-slider d-flex overflow-auto pb-3" id="featuredSlider">
+      <!-- Cards will be added dynamically -->
+    </div>
+  </div>
+</section>
+
+
+    <!-- Inventory Section -->
+    <!-- <section class="container mt-5" id="inventory">
+        <h2 class="section-title text-center">Featured Inventory</h2>
+        <div class="row" id="inventory-container"> -->
+            <!-- Cars dynamically injected here by script.js -->
+        <!-- </div>
+       <div class="text-center mt-4">
+    <a class="btn btn-outline-primary" href="available-cars.html">View All Inventory</a>
+</div>
+    </section> -->
+
+
+<!-- about section -->
+
+
+    <section id="about" class="py-5 text-white" style=>
+  <div class="container">
+    <h2 class="text-center mb-4" > About Us</h2>
+    <div class="row align-items-center">
+      <div class="col-md-6">
+        <img src="autoElite.png" class="img-fluid rounded shadow" alt="About Us" width="320px">
+      </div>
+      <div class="col-md-6">
+        <p class="lead">
+          <strong>AutoElite</strong> is your trusted premium car showroom offering a wide range of luxury vehicles for sale and rent.
+        </p>
+        <p>
+          Our platform ensures easy browsing, secure bookings, and top-notch customer service. Whether you're buying your dream car or listing one to sell, we've got you covered.
+        </p>
+        
+      </div>
+    </div>
+  </div>
+</section>
+
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white mt-5 py-4">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <h5>AutoElite</h5>
+                    <p>Your premium destination for buying, selling and renting luxury vehicles.</p>
+                </div>
+                <div class="col-md-4">
+                    <h5>Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-white">Home</a></li>
+                        <li><a href="available-cars.html" class="text-white">Inventory</a></li>
+                        <li><a href="car-rental.html" class="text-white">Rentals</a></li>
+                        <li><a href="sell-car.html" class="text-white">Sell</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h5>Contact</h5>
+                    <p><i class="fas fa-phone me-2"></i> +91 1234567890</p>
+                    <p><i class="fas fa-envelope me-2"></i> info@autoelite.com</p>
+                </div>
+            </div>
+            <hr />
+            <p class="text-center">&copy; 2025 AutoElite. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sell Your Car - AutoElite</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"/>
+</head>
+<body>
+
+<!-- ✅ Auth Check -->
+<script>
+  const token = localStorage.getItem("token");
+  if (!token) {
+    alert("You must login first to sell a car.");
+    window.location.href = "auth.html?action=login";
+  }
+</script>
+
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <img  src="autoElite.png" alt="AutoElite logo" class="me2" width="60px" /> AutoElite
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="available-cars.html">Inventory</a></li>
+                    <li class="nav-item"><a class="nav-link" href="car-rental.html">Rentals</a></li>
+                    <li class="nav-item"><a class="nav-link" href="sell-car.html">Sell Your Car</a></li>
+                </ul>
+                <!-- <div class="d-flex">
+                    <a href="auth.html?action=login" class="btn btn-outline-light me-2">Login</a>
+                    <a href="auth.html?action=register" class="btn btn-primary">Register</a>
+                </div> -->
+            </div>
+        </div>
+        <li class="nav-item nav-link">
+  <a class=" btn btn-outline-light " href="#" onclick="logout()">Logout</a>
+</li>
+
+    </nav>
+
+
+<!-- Sell Car Form -->
+<div class="container mt-5">
+  <h2 class="text-center mb-4">Sell Your Car</h2>
+  <form id="sellCarForm" class="bg-light p-4 rounded shadow">
+    <div class="row mb-3">
+      <div class="col-md-6">
+        <label for="brand" class="form-label">Car Brand</label>
+        <input type="text" class="form-control" id="brand" required />
+      </div>
+      <div class="col-md-6">
+        <label for="model" class="form-label">Car Model</label>
+        <input type="text" class="form-control" id="model" required />
+      </div>
+    </div>
+    <div class="row mb-3">
+      <div class="col-md-4">
+        <label for="year" class="form-label">Year</label>
+        <input type="number" class="form-control" id="year" min="1990" max="2025" required />
+      </div>
+      <div class="col-md-4">
+        <label for="fuel" class="form-label">Fuel Type</label>
+        <select class="form-select" id="fuel" required>
+          <option value="">Select</option>
+          <option>Petrol</option>
+          <option>Diesel</option>
+          <option>Electric</option>
+          <option>Hybrid</option>
+        </select>
+      </div>
+      <div class="col-md-4">
+        <label for="transmission" class="form-label">Transmission</label>
+        <select class="form-select" id="transmission" required>
+          <option value="">Select</option>
+          <option>Manual</option>
+          <option>Automatic</option>
+        </select>
+      </div>
+    </div>
+    <div class="row mb-3">
+      <div class="col-md-6">
+        <label for="mileage" class="form-label">Mileage (in km)</label>
+        <input type="number" class="form-control" id="mileage" required />
+      </div>
+      <div class="col-md-6">
+        <label for="price" class="form-label">Expected Price (₹)</label>
+        <input type="number" class="form-control" id="price" required />
+      </div>
+    </div>
+    <div class="mb-3">
+      <label for="image" class="form-label">Upload Car Image</label>
+      <input type="file" class="form-control" id="image" accept="image/*" required />
+    </div>
+    <button type="submit" class="btn btn-success w-100">Submit Car for Sale</button>
+  </form>
+</div>
+
+<!-- Footer -->
+<footer class="bg-dark text-white mt-5 py-4">
+  <div class="container text-center">
+    &copy; 2025 AutoElite. All rights reserved.
+  </div>
+</footer>
+
+<!-- Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  document.getElementById("sellCarForm").addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    const newCar = {
+      id: Date.now(),
+      brand: document.getElementById("brand").value.trim(),
+      model: document.getElementById("model").value.trim(),
+      year: document.getElementById("year").value,
+      fuel: document.getElementById("fuel").value.trim(),
+      transmission: document.getElementById("transmission").value.trim(),
+      mileage: document.getElementById("mileage").value,
+      price: document.getElementById("price").value,
+      image: ''
+    };
+
+    const fileInput = document.getElementById("image");
+    const file = fileInput.files[0];
+
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = function () {
+        newCar.image = reader.result;
+
+        const cars = JSON.parse(localStorage.getItem("userCars") || "[]");
+        cars.push(newCar);
+        localStorage.setItem("userCars", JSON.stringify(cars));
+
+        alert("Car submitted successfully!");
+        window.location.href = "index.html";
+      };
+      reader.readAsDataURL(file);
+    } else {
+      alert("Please upload a car image.");
+    }
+  });
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
